@@ -1,0 +1,45 @@
+
+uf0.name=UF0
+uf0.vid.0=0x2341
+uf0.pid.0=0x003e
+uf0.upload.tool=stm32load
+uf0.upload.protocol=sam-ba
+uf0.upload.maximum_size=63488
+uf0.upload.maximum_data_size=7936
+uf0.upload.use_1200bps_touch=false
+uf0.upload.wait_for_upload_port=false
+uf0.upload.native_usb=false
+uf0.build.mcu=cortex-m0
+uf0.build.f_cpu=48000000L
+uf0.build.usb_product="BestU UF0"
+uf0.build.board=STM32_UF0
+uf0.build.core=arduino
+uf0.build.extra_flags=-DSTM32F051 -mthumb {build.usb_flags}
+uf0.build.ldscript=linker_scripts/gcc/flash.ld
+uf0.build.variant=UF0
+uf0.build.variant_system_lib=libstm_stm32f051_gcc_rel.a
+uf0.build.vid=0x2341
+uf0.build.pid=0x003e
+
+
+eduino.name=eduino UNO
+eduino.vid.0=0x2341
+eduino.pid.0=0x003e
+eduino.upload.tool=stm32load
+eduino.upload.protocol=sam-ba
+eduino.upload.maximum_size=63488
+eduino.upload.maximum_data_size=7936
+eduino.upload.use_1200bps_touch=false
+eduino.upload.wait_for_upload_port=false
+eduino.upload.native_usb=false
+eduino.build.mcu=cortex-m0
+eduino.build.f_cpu=48000000L
+eduino.build.usb_product="eduino UNO"
+eduino.build.board=STM32_UNO
+eduino.build.core=arduino
+eduino.build.extra_flags=-DSTM32F051 -mthumb {build.usb_flags}
+eduino.build.ldscript=linker_scripts/gcc/flash.ld
+eduino.build.variant=UNO
+eduino.build.variant_system_lib=libstm_stm32f051_gcc_rel.a
+eduino.build.vid=0x2341
+eduino.build.pid=0x003e

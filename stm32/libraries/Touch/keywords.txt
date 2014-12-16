@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For Wire
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+TOUCH	KEYWORD1
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+scan	KEYWORD2
+getstatus	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+TOUCH_KEY1	LITERAL1
+TOUCH_KEY2	LITERAL1
+TOUCH_KEY3	LITERAL1
+TOUCH_RELEASE	LITERAL1
+TOUCH_RELEASE	LITERAL1
+

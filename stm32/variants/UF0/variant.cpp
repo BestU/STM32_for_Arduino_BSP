@@ -54,6 +54,10 @@ extern const PinDescription g_APinDescription[]=
 	{ GPIOB,  9,  RCC_AHBPeriph_GPIOB, GPIO_OType_OD, GPIO_PuPd_UP,     GPIO_Speed_50MHz, GPIO_AF_1 }, // 20
 	{ GPIOB,  8,  RCC_AHBPeriph_GPIOB, GPIO_OType_OD, GPIO_PuPd_UP,     GPIO_Speed_50MHz, GPIO_AF_1 }, // 21
 	{ GPIOA, 15,  RCC_AHBPeriph_GPIOA, GPIO_OType_PP, GPIO_PuPd_NOPULL, GPIO_Speed_50MHz,         0 }, // 22
+	{ GPIOF,  7,  RCC_AHBPeriph_GPIOF, GPIO_OType_OD, GPIO_PuPd_UP,     GPIO_Speed_50MHz, GPIO_AF_1 }, // 23
+	{ GPIOF,  6,  RCC_AHBPeriph_GPIOF, GPIO_OType_OD, GPIO_PuPd_UP,     GPIO_Speed_50MHz, GPIO_AF_1 }, // 24
+	{ GPIOA,  3,  RCC_AHBPeriph_GPIOA, GPIO_OType_PP, GPIO_PuPd_NOPULL, GPIO_Speed_50MHz, GPIO_AF_1 }, // 25
+	{ GPIOA,  2,  RCC_AHBPeriph_GPIOA, GPIO_OType_PP, GPIO_PuPd_NOPULL, GPIO_Speed_50MHz, GPIO_AF_1 }, // 26
 	// END
 	{ NULL,   0,                 NULL,          NULL,             NULL,             NULL, 0 }
 } ;
@@ -86,6 +90,10 @@ extern const unsigned int pin_ADC_Channel[]=
 	NONE,          // 20
 	NONE,          // 21
 	NONE,          // 22
+	NONE,          // 23
+	NONE,          // 24
+	NONE,          // 25
+	NONE,          // 26
 	NONE           
 };
 
@@ -117,6 +125,10 @@ extern const TIM_TypeDef* pin_TIM[]=
 	NULL,          // 20
 	NULL,          // 21
 	NULL,          // 22
+	NULL,          // 23
+	NULL,          // 24
+	NULL,          // 25
+	NULL,          // 26
 	NULL
 };
 
@@ -145,6 +157,10 @@ extern const uint16_t pin_TIM_Channel[]=
 	NONE,          // 20
 	NONE,          // 21
 	NONE,          // 22
+	NONE,          // 23
+	NONE,          // 24
+	NONE,          // 25
+	NONE,          // 26
 	NONE
 };
 
@@ -157,16 +173,24 @@ extern const uint16_t pin_TIM_Channel[]=
  * USART objects
  */
 RingBuffer rx_buffer1;
+RingBuffer rx_buffer2;
 
 USARTClass Serial(USART1, USART1_IRQn, id_serial, &rx_buffer1);
+USARTClass Serial1(USART2, USART2_IRQn, id_serial1, &rx_buffer2);
 void serialEvent() __attribute__((weak));
 void serialEvent() { }
+
 
 
 // IT handlers
 void USART1_IRQHandler(void) 
 {
 	Serial.IrqHandler();
+}
+
+void USART2_IRQHandler(void) 
+{
+	Serial1.IrqHandler();
 }
 
 
@@ -176,6 +200,7 @@ void USART1_IRQHandler(void)
 void serialEventRun(void)
 {
 	if (Serial.available()) serialEvent();
+	if (Serial1.available()) serialEvent();
 }
 // ----------------------------------------------------------------------------
 

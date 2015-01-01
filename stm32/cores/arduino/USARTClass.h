@@ -27,7 +27,8 @@
 
 
 
-#define id_serial  0
+#define id_serial    0
+#define id_serial1   1
 
 class USARTClass : public HardwareSerial
 {

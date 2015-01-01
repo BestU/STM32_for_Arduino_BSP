@@ -57,7 +57,7 @@ extern "C"{
  *----------------------------------------------------------------------------*/
  
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (23u)
+#define PINS_COUNT           (27u)
 // LEDs
 #define PIN_LED_13           (22u)
 #define PIN_LED_RXL          -1
@@ -77,7 +77,10 @@ static const uint8_t SCK  = 13;
 static const uint8_t SDA = 20;
 static const uint8_t SCL = 21;
 
-#define LED_BUILTIN 13
+static const uint8_t SDA1 = 23;
+static const uint8_t SCL1 = 24;
+
+#define LED_BUILTIN PIN_LED_13
 
 static const uint8_t A0 = 14;
 static const uint8_t A1 = 15;
@@ -89,6 +92,9 @@ static const uint8_t A5 = 19;
 
 static const uint8_t RX = 0;
 static const uint8_t TX = 1;
+
+static const uint8_t RX1 = 25;
+static const uint8_t TX1 = 26;
 
 extern const unsigned int pin_ADC_Channel[];
 extern const TIM_TypeDef* pin_TIM[];
@@ -102,7 +108,7 @@ extern const uint16_t pin_TIM_Channel[];
 #define PWM_RESOLUTION		8
 
 #define WIRE_ISR_HANDLER	I2C1_IRQHandler
-
+#define WIRE1_ISR_HANDLER	I2C2_IRQHandler
 
 
 
@@ -117,6 +123,7 @@ extern const uint16_t pin_TIM_Channel[];
 #ifdef __cplusplus
 
 extern USARTClass Serial;
+extern USARTClass Serial1;
 
 #endif
 

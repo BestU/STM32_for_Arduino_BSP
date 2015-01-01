@@ -49,6 +49,17 @@ void USARTClass::begin( const uint32_t dwBaudRate )
 		// Configure USART Tx as alternate function push-pull
 		pinMode(TX, ALTERNATE);
 	}
+	else if (_dwId == id_serial1)
+	{
+		// Enable USART Clock
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+
+		// Configure USART Rx as input floating
+		pinMode(RX1, ALTERNATE);
+
+		// Configure USART Tx as alternate function push-pull
+		pinMode(TX1, ALTERNATE);
+	}
   
 	// USART default configuration
 	// USART configured as follow:

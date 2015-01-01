@@ -47,6 +47,13 @@ void TwoWire::begin(void) {
 
 		pinMode(SDA, ALTERNATE);
 		pinMode(SCL, ALTERNATE);
+	} 
+	else if (twi == I2C2) 
+	{
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2, ENABLE);
+
+		pinMode(SDA1, ALTERNATE);
+		pinMode(SCL1, ALTERNATE);
 	}
 
 
@@ -364,22 +371,17 @@ void TwoWire::onService(void)
 
 
 TwoWire Wire = TwoWire(I2C1);
+TwoWire Wire1 = TwoWire(I2C2);
 
-extern "C" void f(void);
-
-void f(void)
-{
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
-
-  Wire.onService();
-  
-}
 #ifdef __cplusplus
 extern "C" {
 #endif
 void WIRE_ISR_HANDLER(void) {
 	Wire.onService();
+}
+
+void WIRE1_ISR_HANDLER(void) {
+	Wire1.onService();
 }
 #ifdef __cplusplus
 }

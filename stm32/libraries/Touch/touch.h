@@ -5,7 +5,7 @@
 #include "variant.h"
 
 
-#define THRESHOLD 60
+#define THRESHOLD 350
 
 typedef enum 
 {

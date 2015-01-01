@@ -1,7 +1,9 @@
 
-//eDuino board test example
+//UF0 board test example
+#include "touch.h"
 
 int error_flag = 0;
+TOUCH touch;
 
 const unsigned char pin[][2] = {
 { 2,  3},
@@ -44,8 +46,6 @@ void setup()
   Serial.begin(9600);  // start serial for output
   pinMode(22, OUTPUT); //configurate LED pin
   digitalWrite(22, LOW);
-  pinMode(23, OUTPUT); //configurate button pin
-  digitalWrite(23, LOW);
   error_flag = 0;
   Serial.println("Start GPIO Test!");
   for ( i = 0; i < sizeof(pin) / 2; i++)
@@ -69,24 +69,28 @@ void setup()
        Serial.print(pin[i][1]);
        Serial.println("Test OK!");
     }
-  } 
+  }
+  while (error_flag) {
+    delay(100);
+	digitalWrite(22, LOW);
+	delay(100);
+	digitalWrite(22, HIGH);
+  }
+  touch.begin();
 }
 
 void loop()
 {
-
-  if (error_flag == 0)
-  {
-    digitalWrite(22, HIGH);
-    digitalWrite(23, HIGH);
-  }
-  else
-  {
+  touch.scan();
+	
+  if (touch.getstatus(TOUCH_KEY1) == TOUCH_PRESSED) {
     digitalWrite(22, LOW);
-    digitalWrite(23, HIGH);
-    delay(300);
+  } else if (touch.getstatus(TOUCH_KEY2) == TOUCH_PRESSED) {
+    digitalWrite(22, LOW);
+  } else if (touch.getstatus(TOUCH_KEY3) == TOUCH_PRESSED) {
+    digitalWrite(22, LOW);
+  } else {
     digitalWrite(22, HIGH);
-    digitalWrite(23, LOW);
-    delay(300);
   }
+  delay(100);
 }

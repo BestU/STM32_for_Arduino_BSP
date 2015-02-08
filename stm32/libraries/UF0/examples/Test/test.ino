@@ -15,7 +15,9 @@ const unsigned char pin[][2] = {
 {14, 15},
 {16, 17},
 {18, 19},
-{20, 21}
+{20, 21},
+{23, 24},
+{25, 26}
 };
 
 void set_pinmode(int out, int in)

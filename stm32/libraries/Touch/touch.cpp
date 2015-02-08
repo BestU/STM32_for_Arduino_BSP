@@ -56,20 +56,46 @@ void TOUCH::begin(void)
 	TSC->IOCCR |= tmp_value;
 	// Enable group, G3 and G4
 	//TSC->IOGCSR |= (1 << 2);
+	_trace.key[0].enable_mask = 1 << 9;
+	_trace.key[1].enable_mask = 1 << 10;
+	_trace.key[2].enable_mask = 1 << 14;
+
+	{
+		uint32_t i, j;
+		uint16_t buf[3][3];
+
+		for (j = 0; j < 3; j++) {
+			for (i = 0; i < 3; i++) {
+				scan_channel(i);
+				buf[i][j] =  _trace.key[i].current_value;
+				delay(100);
+			}
+		}
+		j = 0;
+		for (i = 0; i < 3; i++) {
+			j += buf[0][i];
+		}
+		_trace.key[0].fixed_value = j / 3;
+		j = 0;
+		for (i = 0; i < 3; i++) {
+			j += buf[1][i];
+		}
+		_trace.key[1].fixed_value = j / 3;
+		j = 0;
+		for (i = 0; i < 3; i++) {
+			j += buf[2][i];
+		}
+		_trace.key[2].fixed_value = j / 3;
+	}
 
 	_trace.index = 0;
-	_trace.key[0].fixed_value = 0xD64;
-	_trace.key[1].fixed_value = 0xDED;
-	_trace.key[2].fixed_value = 0x1023;
 	_trace.key[0].current_value = 0;
 	_trace.key[1].current_value = 0;
 	_trace.key[2].current_value = 0;
 	_trace.key[0].status = TOUCH_RELEASE;
 	_trace.key[1].status = TOUCH_RELEASE;
 	_trace.key[2].status = TOUCH_RELEASE;
-	_trace.key[0].enable_mask = 1 << 9;
-	_trace.key[1].enable_mask = 1 << 10;
-	_trace.key[2].enable_mask = 1 << 14;
+
 	
 }
 void TOUCH::scan(void)
@@ -106,6 +132,7 @@ void TOUCH::scan_channel(int index)
 	} else {
 		_trace.key[index].current_value = TSC->IOGXCR[2];
 	}
+
 	diff = abs(_trace.key[index].current_value - _trace.key[index].fixed_value);
 	if(diff > THRESHOLD)
 	{

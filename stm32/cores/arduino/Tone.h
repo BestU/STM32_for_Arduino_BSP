@@ -19,5 +19,7 @@
 #ifndef _WIRING_TONE_
 #define _WIRING_TONE_
 
+void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
+void noTone(uint8_t _pin);
 
 #endif /* _WIRING_TONE_ */

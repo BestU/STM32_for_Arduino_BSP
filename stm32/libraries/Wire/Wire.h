@@ -108,6 +108,7 @@ private:
 };
 
 extern TwoWire Wire;
+extern TwoWire Wire1;
 
 
 #endif
